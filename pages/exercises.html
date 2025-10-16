@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Exercises — Fitness App</title>
+        <link rel="stylesheet" href="exercises.css">
+    </head>
+
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="brand">Fit Track</h1>
+                <nav class="main-nav">
+                    <a href="exercises.html" class="active">Exercises</a>
+                    <a href="history.html">History</a>
+                    <a href="profile.html">Profile</a>
+                </nav>
+            </div>
+        </header>
+
+
+        <main class="container">
+            <section class="hero">
+                <h2>Choose a workout</h2>
+                <p class="muted">Tap a routine to view details and start.</p>
+                
+                <div class="controls">
+                    <label class="search">
+                        <input id="searchInput" type="search" placeholder="Search exercises or routines" aria-label="Search routines">
+                    </label>
+
+                    <select id="filterSelect" aria-label="Filter by focus" class="filter">
+                        <option value="all">All goals</option>
+                        <option value="cardio">Cardio</option>
+                        <option value="strength">Strength</option>
+                        <option value="mobility">Mobility</option>
+                    </select>
+                </div>
+            </section>
+
+
+            <section id="workoutGrid" class="grid" aria-label="Available workouts"></section>
+        </main>
+
+
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <small>© <span id="year"></span> Fit Track</small>
+            </div>
+        </footer>
+
+
+        <script src="exercises.js"></script>
+    </body>
+</html>
