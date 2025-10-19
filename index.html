@@ -1,82 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FitTrack | Fitness Tracker App</title>
-  <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-
-<body>
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <h1>FitTrack</h1>
-    <ul>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Exercises</a></li>
-      <li><a href="#">History</a></li>
-      <li><a href="#">Profile</a></li>
-    </ul>
-  </nav>
-
-  <!-- Main Dashboard Section -->
-  <main class="dashboard-container">
-
-    <!-- Log Workout Section -->
-    <section class="log-workout">
-      <h2>Log Workout</h2>
-
-      <form>
-        <label for="exercise">Exercise</label>
-        <select id="exercise" name="exercise">
-          <option value="">Select exercise</option>
-          <option value="pushups">Push Ups</option>
-          <option value="squats">Squats</option>
-          <option value="plank">Plank</option>
-        </select>
-
-        <label for="sets">Sets</label>
-        <input type="number" id="sets" name="sets" placeholder="e.g. 3">
-
-        <label for="reps">Reps</label>
-        <input type="number" id="reps" name="reps" placeholder="e.g. 12">
-
-        <label for="weight">Weight (kg/lb)</label>
-        <input type="number" id="weight" name="weight" placeholder="e.g. 20">
-
-        <button type="submit">Add Exercise</button>
-      </form>
-
-      <!-- Today's Logged Exercises -->
-      <div class="today-log">
-        <h3>Today's Exercises</h3>
-        <ul id="exercise-list">
-          <li>Push Ups - 3 sets of 12 reps</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Progress Summary (stacked below the log form) -->
-    <section class="progress-summary">
-      <h2>Progress Summary</h2>
-
-      <div class="chart-placeholder">
-        <!-- Chart placeholder -->
-        <p>[Progress Chart Here]</p>
-      </div>
-
-      <div class="stats">
-        <p><strong>Total Workouts:</strong> 12</p>
-        <p><strong>Total Weight Lifted:</strong> 860 kg</p>
-        <p><strong>Average Reps:</strong> 10</p>
-      </div>
-
-      <button>View Detailed Progress</button>
-    </section>
-  </main>
-
-  <!-- Bottom Section -->
-  <footer>
-    <p>💡 Tip of the Day: Stay hydrated and stretch before and after workouts!</p>
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fitness-tracker-app</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
