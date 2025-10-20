@@ -1,21 +1,24 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import Exercises from "./pages/Exercises";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
-import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <>
+    <Router>
+      {/* Navbar will appear on every page */}
       <Navbar />
+
+      {/* Define all routes */}
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/exercises" element={<Exercises />} />
         <Route path="/history" element={<History />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-    </>
+    </Router>
   );
 }
 
