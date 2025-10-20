@@ -1,86 +1,78 @@
 import { useEffect, useState } from "react";
-import { fetchExercises, fetchExercisesByMuscle } from "../api/wgerAPI";
+import { fetchExercises } from "../api/wgerAPI";
 
-const muscleGroups = [
-  { id: 1, name: "Biceps" },
-  { id: 2, name: "Shoulders" },
-  { id: 4, name: "Chest" },
-  { id: 5, name: "Back" },
-  { id: 6, name: "Triceps" },
-  { id: 7, name: "Abdominals" },
-  { id: 8, name: "Quadriceps" },
-  { id: 9, name: "Hamstrings" },
-  { id: 10, name: "Calves" },
-];
-
-const Exercises = () => {
+export default function Exercises() {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedMuscle, setSelectedMuscle] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function loadExercises() {
-      setLoading(true);
-      const data = selectedMuscle
-        ? await fetchExercisesByMuscle(selectedMuscle)
-        : await fetchExercises(10);
-      setExercises(data);
-      setLoading(false);
+      try {
+        const data = await fetchExercises();
+        setExercises(data.results || []);
+      } catch (err) {
+        setError("Failed to load exercises. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
     }
+
     loadExercises();
-  }, [selectedMuscle]);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="pt-20 flex justify-center items-center min-h-screen">
+        <p className="text-gray-500 text-lg animate-pulse">Loading exercises...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="pt-16 text-center text-red-500 font-medium">
+        {error}
+      </div>
+    );
+  }
 
   return (
-    <main className="flex-grow container mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-6 text-[#FF6B6B]">Exercises</h2>
+    <div className="pt-16 p-6 max-w-6xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6 text-blue-600">Exercises</h1>
 
-      {/* Muscle Filter */}
-      <div className="mb-6">
-        <label className="block font-medium mb-2">Filter by Muscle:</label>
-        <select
-          value={selectedMuscle}
-          onChange={(e) => setSelectedMuscle(e.target.value)}
-          className="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/3"
-        >
-          <option value="">All Muscles</option>
-          {muscleGroups.map((muscle) => (
-            <option key={muscle.id} value={muscle.id}>
-              {muscle.name}
-            </option>
-          ))}
-        </select>
+      {/* Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {exercises.map((exercise) => (
+          <div
+            key={exercise.id}
+            className="bg-white shadow-md rounded-2xl p-4 hover:shadow-lg transition transform hover:-translate-y-1"
+          >
+            {/* Exercise Image */}
+            {exercise.images && exercise.images.length > 0 ? (
+              <img
+                src={exercise.images[0].image}
+                alt={exercise.name}
+                className="w-full h-48 object-cover rounded-xl mb-3"
+              />
+            ) : (
+              <div className="w-full h-48 bg-gray-200 flex items-center justify-center rounded-xl mb-3 text-gray-500">
+                No Image
+              </div>
+            )}
+
+            {/* Exercise Info */}
+            <h2 className="text-lg font-semibold text-gray-800 mb-1">
+              {exercise.name}
+            </h2>
+            <p className="text-sm text-gray-600">
+              {exercise.muscles?.length
+                ? exercise.muscles.map((m) => m.name).join(", ")
+                : "General fitness"}
+            </p>
+          </div>
+        ))}
       </div>
-
-      {/* Exercises Grid */}
-      {loading ? (
-        <p className="text-center text-lg">Loading exercises...</p>
-      ) : exercises.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {exercises.map((exercise) => (
-            <div
-              key={exercise.id}
-              className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition"
-            >
-              <h3 className="text-xl font-semibold mb-2 text-[#6BCB77]">
-                {exercise.name}
-              </h3>
-              <p className="text-sm text-gray-600 mb-2">
-                <strong>Category:</strong>{" "}
-                {exercise.category?.name || "Unknown"}
-              </p>
-              <p className="text-gray-700 text-sm">
-                {exercise.description
-                  ? exercise.description.replace(/<[^>]+>/g, "")
-                  : "No description available."}
-              </p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-gray-500">No exercises found.</p>
-      )}
-    </main>
+    </div>
   );
-};
-
-export default Exercises;
+}

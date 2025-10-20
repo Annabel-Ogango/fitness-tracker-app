@@ -35,7 +35,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] text-[#2D3436] p-6">
+    <div className="min-h-screen bg-[#F8F9FA] text-[#2D3436] pt-20 p-6">
       {/* Top Navigation */}
       <nav className="flex justify-around bg-[#FF6B6B] text-white p-4 rounded-2xl shadow-md mb-6">
         <button className="font-semibold hover:text-[#FFD93D]">Dashboard</button>

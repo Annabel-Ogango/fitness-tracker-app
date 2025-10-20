@@ -3,9 +3,9 @@ import Footer from "../components/Footer";
 const History = () => {
   return (
     <div className="flex flex-col min-h-screen bg-[#F8F9FA] text-[#2D3436]">
-      {/* ✅ Removed Header */}
+      {/*Removed Header */}
 
-      <main className="flex-grow container mx-auto p-6">
+      <main className="flex-grow container mx-auto p-6 pt-20">
         <section className="mb-8">
           <h2 className="text-3xl font-bold text-[#FF6B6B] mb-2">Workout History</h2>
           <p className="text-gray-600">Sessions logged and progress overview.</p>

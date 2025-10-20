@@ -5,7 +5,7 @@ const Profile = () => {
     <div className="flex flex-col min-h-screen bg-[#F8F9FA] text-[#2D3436]">
       {/* ✅ Removed Header */}
 
-      <main className="flex-grow container mx-auto p-6">
+      <main className="flex-grow container mx-auto p-6 pt-20">
         <h2 className="text-3xl font-bold mb-6 text-[#FF6B6B]">Profile</h2>
 
         <div className="bg-white p-6 rounded-xl shadow max-w-md mx-auto">
