@@ -1,4 +1,6 @@
 import React from "react";
+import { Chart, Filler } from 'chart.js';
+Chart.register(Filler);
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 const data = [
