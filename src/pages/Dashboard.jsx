@@ -18,7 +18,6 @@ const Dashboard = () => {
   const [exercises, setExercises] = useState([]);
   const [form, setForm] = useState({ name: "", sets: "", reps: "", weight: "" });
 
-  // Mock chart data
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
     datasets: [
@@ -39,12 +38,10 @@ const Dashboard = () => {
     scales: { y: { beginAtZero: true } },
   };
 
-  // 🧩 Handle input change
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 🧩 Add exercise to list
   const handleAddExercise = () => {
     if (!form.name || !form.sets || !form.reps || !form.weight) return;
     setExercises([...exercises, form]);
@@ -53,13 +50,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#2D3436] pt-20 p-6">
-      {/* Top Navigation */}
-      <nav className="flex justify-around bg-[#FF6B6B] text-white p-4 rounded-2xl shadow-md mb-6">
-        <button className="font-semibold hover:text-[#FFD93D]">Dashboard</button>
-        <button className="hover:text-[#FFD93D]">Exercises</button>
-        <button className="hover:text-[#FFD93D]">History</button>
-        <button className="hover:text-[#FFD93D]">Profile</button>
-      </nav>
+      {/* Removed static nav — dropdown nav handles navigation now */}
 
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -169,6 +160,14 @@ const Dashboard = () => {
             View Detailed Progress
           </button>
         </div>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="bg-white mt-6 p-4 rounded-2xl shadow-md">
+        <h3 className="text-lg font-semibold mb-2 text-[#FF6B6B]">💡 Workout Tips</h3>
+        <p className="text-gray-700">
+          Remember to warm up before each session and track your form to avoid injuries.
+        </p>
       </div>
     </div>
   );
