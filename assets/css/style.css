@@ -1,12 +1,5 @@
 /* Base (Mobile First) */
 
-body {
-background: #007bff;
-height: 100%;
-width: 60%;
-transition: width 0.4s ease;
-}
-
 
 /* Profile Page */
 .profile-container {
