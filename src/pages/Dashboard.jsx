@@ -68,6 +68,7 @@ const Dashboard = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: { y: { beginAtZero: true } },
   };
@@ -149,7 +150,9 @@ const Dashboard = () => {
         {/* Right Section: Progress */}
         <div className="bg-white p-6 rounded-2xl shadow-md flex flex-col justify-between">
           <h2 className="text-xl font-bold mb-4 text-[#FF6B6B]">Progress Summary</h2>
-          <div className="mb-4">
+
+          {/* Responsive Chart Wrapper */}
+          <div className="w-full h-64 md:h-80 mb-6">
             <Line data={data} options={options} />
           </div>
 
@@ -181,7 +184,7 @@ const Dashboard = () => {
 
           <a
             href="/history"
-            className="mt-6 w-full sm:w-auto px-6 py-2 bg-[#FF6B6B] text-white text-center font-semibold rounded-lg shadow-md hover:bg-[#ff4c4c] transition-all duration-200"
+            className="mt-4 w-full sm:w-auto px-6 py-2 bg-[#FF6B6B] text-white text-center font-semibold rounded-lg shadow-md hover:bg-[#ff4c4c] transition-all duration-200"
           >
             View Detailed Progress
           </a>
