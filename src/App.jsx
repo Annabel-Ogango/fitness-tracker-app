@@ -8,8 +8,11 @@ import Profile from "./pages/Profile";
 function App() {
   return (
     <Router>
-      {/* Navbar will appear on every page */}
+      {/* Navbar stays fixed at the top */}
       <Navbar />
+
+      {/* Adds a spacer below it */}
+      <div className="h-50"></div>
 
       {/* Define all routes */}
       <Routes>
