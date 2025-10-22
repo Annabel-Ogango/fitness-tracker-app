@@ -1,38 +1,60 @@
-import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
 
-const History = () => {
+export default function History() {
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    // Load saved workouts from localStorage
+    const saved = localStorage.getItem("workoutHistory");
+    if (saved) {
+      setHistory(JSON.parse(saved));
+    }
+  }, []);
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8F9FA] text-[#2D3436]">
-      {/*Removed Header */}
+    <div className="pt-20 px-6 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6 text-blue-600">Workout History</h1>
 
-      <main className="flex-grow container mx-auto p-6 pt-20">
-        <section className="mb-8">
-          <h2 className="text-3xl font-bold text-[#FF6B6B] mb-2">Workout History</h2>
-          <p className="text-gray-600">Sessions logged and progress overview.</p>
-        </section>
+      {history.length === 0 ? (
+        <div className="text-center text-gray-500 mt-10">
+          <p>No workouts logged yet.</p>
+          <p className="text-sm">Start by logging a workout on your Dashboard!</p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {history
+            .sort((a, b) => new Date(b.date) - new Date(a.date)) // latest first
+            .map((entry, index) => (
+              <div
+                key={index}
+                className="bg-white shadow-sm rounded-xl p-4 border hover:shadow-md transition"
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <h2 className="text-lg font-semibold text-gray-800">
+                    {entry.name}
+                  </h2>
+                  <span className="text-sm text-gray-500">
+                    {new Date(entry.date).toLocaleDateString()}
+                  </span>
+                </div>
 
-        <section className="mb-6">
-          <input
-            type="search"
-            placeholder="Search by exercise"
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2"
-          />
-        </section>
-
-        <section>
-          <div className="bg-white p-4 rounded-xl shadow mb-4">
-            <h3 className="font-semibold">2025-10-05</h3>
-            <ul className="text-sm text-gray-700 mt-2">
-              <li>Bench Press: 3x10 @ 40kg</li>
-              <li>Squats: 3x12 @ 50kg</li>
-            </ul>
-          </div>
-        </section>
-      </main>
-
-      <Footer />
+                <div className="text-sm text-gray-600">
+                  {entry.sets && entry.reps && (
+                    <p>
+                      <span className="font-medium">Sets:</span> {entry.sets},{" "}
+                      <span className="font-medium">Reps:</span> {entry.reps}
+                    </p>
+                  )}
+                  {entry.notes && (
+                    <p className="italic text-gray-500 mt-1">
+                      “{entry.notes}”
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+        </div>
+      )}
     </div>
   );
-};
-
-export default History;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Chart, Filler } from "chart.js";
 Chart.register(Filler);
 import { Line } from "react-chartjs-2";
@@ -17,7 +17,41 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip,
 const Dashboard = () => {
   const [exercises, setExercises] = useState([]);
   const [form, setForm] = useState({ name: "", sets: "", reps: "", weight: "" });
+  const [message, setMessage] = useState("");
 
+  // Load exercises from localStorage on mount
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("workoutHistory")) || [];
+    setExercises(saved);
+  }, []);
+
+  // Save to localStorage when exercises update
+  useEffect(() => {
+    localStorage.setItem("workoutHistory", JSON.stringify(exercises));
+  }, [exercises]);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleAddExercise = () => {
+    if (!form.name || !form.sets || !form.reps || !form.weight) {
+      setMessage("⚠️ Please fill all fields before adding.");
+      return;
+    }
+
+    const newExercise = {
+      ...form,
+      date: new Date().toISOString(),
+    };
+
+    setExercises([...exercises, newExercise]);
+    setForm({ name: "", sets: "", reps: "", weight: "" });
+    setMessage("✅ Exercise added!");
+    setTimeout(() => setMessage(""), 2500);
+  };
+
+  // Chart data
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
     datasets: [
@@ -38,23 +72,11 @@ const Dashboard = () => {
     scales: { y: { beginAtZero: true } },
   };
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleAddExercise = () => {
-    if (!form.name || !form.sets || !form.reps || !form.weight) return;
-    setExercises([...exercises, form]);
-    setForm({ name: "", sets: "", reps: "", weight: "" });
-  };
-
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-[#2D3436] pt-20 p-6">
-      {/* Removed static nav — dropdown nav handles navigation now */}
-
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Left Section */}
+        {/* Left Section: Log Workout */}
         <div className="bg-white p-6 rounded-2xl shadow-md">
           <h2 className="text-xl font-bold mb-4 text-[#FF6B6B]">Log Workout</h2>
           <div className="space-y-3">
@@ -98,6 +120,7 @@ const Dashboard = () => {
             >
               + Add Exercise
             </button>
+            {message && <p className="text-sm text-gray-700 mt-2">{message}</p>}
           </div>
 
           {/* Exercise List */}
@@ -110,7 +133,7 @@ const Dashboard = () => {
                 {exercises.map((ex, idx) => (
                   <li
                     key={idx}
-                    className="flex justify-between bg-[#F8F9FA] p-2 rounded-lg"
+                    className="flex justify-between bg-[#F8F9FA] p-2 rounded-lg text-sm"
                   >
                     <span>{ex.name}</span>
                     <span>
@@ -123,7 +146,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Right Section */}
+        {/* Right Section: Progress */}
         <div className="bg-white p-6 rounded-2xl shadow-md flex flex-col justify-between">
           <h2 className="text-xl font-bold mb-4 text-[#FF6B6B]">Progress Summary</h2>
           <div className="mb-4">
@@ -156,9 +179,12 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <button className="bg-[#FFD93D] text-[#2D3436] py-2 rounded-lg font-semibold hover:bg-[#ffca2c] transition">
+          <a
+            href="/history"
+            className="mt-6 w-full sm:w-auto px-6 py-2 bg-[#FF6B6B] text-white text-center font-semibold rounded-lg shadow-md hover:bg-[#ff4c4c] transition-all duration-200"
+          >
             View Detailed Progress
-          </button>
+          </a>
         </div>
       </div>
 
