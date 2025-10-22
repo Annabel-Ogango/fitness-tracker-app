@@ -1,16 +1,134 @@
-# React + Vite
+# 💪 FitTrack — Fitness Tracker App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FitTrack is a modern fitness tracking web app built with **React** and **Tailwind CSS**.  
+It allows users to **log workouts**, **track progress over time**, and **manage their fitness profile** in a simple and beautiful interface.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+### Log Workouts
+- Add new exercises with **name, sets, reps, and weight**.
+- Automatically saves progress in **localStorage**.
+- Displays a list of all exercises logged for the day.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Progress Tracking
+- Dynamic **line chart** showing workout trends using **Chart.js**.
+- Tracks **total workouts**, **average reps**, and **total weight lifted**.
+- Responsive layout that looks great on all devices.
 
-## Expanding the ESLint configuration
+### User Profile
+- Users can add their **name**, **email**, **age**, and **profile photo**.
+- Profile data is stored locally and shown after sign-in.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Workout History
+- Displays all previously logged exercises along with dates.
+- Allows users to review their progress over time.
+
+### Simple Navigation
+- Fixed top navigation bar with dropdown menu.
+- Links to Dashboard, Exercises, History, and Profile pages.
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology 
+|-------------|
+| **React (Vite)** | 
+| **Tailwind CSS** |
+| **Chart.js + React ChartJS 2** |
+| **LocalStorage API** |
+| **JavaScript (ES6)** |
+| **Vite** |
+
+---
+
+## 📂 Folder Structure
+
+```
+
+fitness-tracker-app/
+│
+├── public/
+│   └── logo.png
+│
+├── src/
+│   ├── assets/           # Images & static files
+│   ├── components/       # Reusable UI components
+│   ├── pages/            # Dashboard, Exercises, History, Profile
+│   ├── api/              # API helpers (if using external exercise data)
+│   ├── App.jsx           # Main app layout and router
+│   ├── main.jsx          # React entry point
+│   ├── index.css         # Tailwind imports
+│   └── styles.css        # Custom global styles
+│
+├── tailwind.config.js    # Tailwind configuration
+├── postcss.config.cjs    # PostCSS setup
+├── package.json          # Dependencies and scripts
+└── README.md             # You're reading this file
+
+````
+
+---
+
+## Installation & Setup
+
+Follow these steps to run the project locally:
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/Annabel-Ogango/fitness-tracker-app.git
+cd fitness-tracker-app
+````
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Run the development server
+
+```bash
+npm run dev
+```
+
+Then open your browser and go to:
+
+```
+http://localhost:5173/
+```
+
+---
+
+## 📸 Pages
+
+### 🏠 Dashboard Page
+
+Displays current workouts, progress chart, and workout summary.
+
+### 🧍 Profile Page
+
+Shows user profile form with name, email, age, and photo upload.
+
+### 📊 History Page
+
+Lists all previously logged exercises with timestamps.
+
+---
+
+## 🧑‍💻 Author
+
+**Annabel Ogango**
+
+---
+
+
+### 💡 Tip for Demo Video
+
+---
+
+Made using **React + Tailwind + Chart.js**
+
+```
