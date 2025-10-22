@@ -124,11 +124,6 @@ Lists all previously logged exercises with timestamps.
 
 ---
 
-
-### 💡 Tip for Demo Video
-
----
-
 Made using **React + Tailwind + Chart.js**
 
 ```
